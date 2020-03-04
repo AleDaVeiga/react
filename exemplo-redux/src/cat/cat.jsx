@@ -20,9 +20,7 @@ export default class Todo extends Component {
 
     render() {
         return (
-            <div>
-                <CatList list={this.state.list} />
-            </div>
+            <CatList list={this.state.list} />
         )
     }
 }
