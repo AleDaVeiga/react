@@ -5,7 +5,7 @@ import CatList from './catList'
 
 const URL = 'http://api.thecatapi.com/v1/images/search?limit=10&category_ids=1'
 
-export default class Todo extends Component {
+export default class Cat extends Component {
     constructor(props) {
         super(props)
         this.state = { list: [] }
