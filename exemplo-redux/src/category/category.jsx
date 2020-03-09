@@ -1,29 +1,25 @@
-import axios from 'axios'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getCategories } from './categoryActions'
 import CategoryList from './categoryList'
 
-const URL = 'http://api.thecatapi.com/v1/categories'
-
-export default class Category extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { list: [] }
-        this.refresh()
-    }
-
-    refresh() {
-        axios.defaults.headers.common['Content-Type'] = 'application/json'
-        axios.defaults.headers.common['x-api-key'] = '47797718-bee7-4d03-80f0-47714f42f84b'
-        axios.get(`${URL}`).then(resp => this.setState({...this.state, list: resp.data}))
+class Category extends Component {
+    componentWillMount() {
+        this.props.getCategories()
     }
 
     render() {
         return (
             <section className='sidebar'>
                 <nav className='mt-2'>
-                    <CategoryList list={this.state.list} />
+                    <CategoryList />
                 </nav>
             </section>
         )
     }
 }
+
+const mapStateToProps = state => ({ category: state.exemplo.category })
+const mapDispatchToProps = dispatch => bindActionCreators({ getCategories }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(Category)

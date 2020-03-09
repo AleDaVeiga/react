@@ -1,14 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { filterCats } from './categoryActions'
 
-export default props => {
+const CategoryList = props => {
     const renderRows = () => {
-        const list = props.list || []
-        return list.map(ct => (
-                <li className="nav-item" key={ct.id}>
-                    <a href="/" className="nav-link">
+        const categories = props.categories || []
+        return categories.map(ct => (
+                <li className="nav-item" key={ct._id}>
+                    <a href="javascript:void(0)" className="nav-link" onClick={() => props.filterCats(ct._id)}>
                         <i className='nav-icon fa fa-bars'></i>
                         <p>
-                            {ct.author}
+                            {ct.description}
                         </p>
                     </a>
                 </li>
@@ -21,3 +24,7 @@ export default props => {
         </ul>
     )
 }
+
+const mapStateToProps = state => ({ categories: state.exemplo.categories })
+const mapDispatchToProps = dispatch => bindActionCreators({ filterCats }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList)
