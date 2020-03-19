@@ -7,11 +7,11 @@ const CategoryList = props => {
     const renderRows = () => {
         const categories = props.categories || []
         return categories.map(ct => (
-                <li className="nav-item" key={ct._id}>
-                    <a href="javascript:void(0)" className="nav-link" onClick={() => props.filterCats(ct._id)}>
+                <li className="nav-item" key={ct.id}>
+                    <a href="#" className="nav-link" onClick={() => props.filterCats(ct.id)}>
                         <i className='nav-icon fa fa-bars'></i>
                         <p>
-                            {ct.description}
+                            {ct.name}
                         </p>
                     </a>
                 </li>
